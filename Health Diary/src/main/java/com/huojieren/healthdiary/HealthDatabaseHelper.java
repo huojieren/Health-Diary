@@ -15,7 +15,7 @@ public class HealthDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE diet (id INTEGER PRIMARY KEY, date TEXT, description TEXT)");
+        db.execSQL("CREATE TABLE diet (id INTEGER PRIMARY KEY, date , description TEXT)");
         db.execSQL("CREATE TABLE exercise (id INTEGER PRIMARY KEY, date TEXT, description TEXT)");
         db.execSQL("CREATE TABLE sleep (id INTEGER PRIMARY KEY, date TEXT, description TEXT)");
     }

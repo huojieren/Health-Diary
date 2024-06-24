@@ -13,16 +13,25 @@
         android:theme="@style/Theme.HealthDiary"
         tools:targetApi="31">
         <activity
-            android:name=".SummaryActivity"
+            android:name=".activity.SummaryActivity"
             android:exported="false" />
         <activity
-            android:name=".SleepActivity"
+            android:name=".activity.SleepActivity"
             android:exported="false" />
         <activity
-            android:name=".ExerciseActivity"
+            android:name=".activity.ExerciseActivity"
             android:exported="false" />
         <activity
-            android:name=".DietActivity"
+            android:name=".activity.DietActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddSleepActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddExerciseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddDietActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

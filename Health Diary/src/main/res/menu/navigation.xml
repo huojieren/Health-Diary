@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_diet"
+        android:icon="@drawable/ic_diet"
+        android:title="Diet" />
+    <item
+        android:id="@+id/navigation_exercise"
+        android:icon="@drawable/ic_exercise"
+        android:title="Exercise" />
+    <item
+        android:id="@+id/navigation_sleep"
+        android:icon="@drawable/ic_sleep"
+        android:title="Sleep" />
+    <item
+        android:id="@+id/navigation_summary"
+        android:icon="@drawable/ic_summary"
+        android:title="Summary" />
+</menu>

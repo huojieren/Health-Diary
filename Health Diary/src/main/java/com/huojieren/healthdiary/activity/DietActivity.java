@@ -1,4 +1,4 @@
-package com.huojieren.healthdiary;
+package com.huojieren.healthdiary.activity;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -6,36 +6,40 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ExerciseActivity extends AppCompatActivity {
+import com.huojieren.healthdiary.HealthDatabaseHelper;
+import com.huojieren.healthdiary.R;
 
-    private EditText exerciseInput;
+public class DietActivity extends AppCompatActivity {
+
+    private EditText dietInput;
     private HealthDatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exercise);
+        setContentView(R.layout.activity_diet);
 
-        exerciseInput = findViewById(R.id.exercise_input);
+        dietInput = findViewById(R.id.diet_input);
         dbHelper = new HealthDatabaseHelper(this);
 
-        findViewById(R.id.save_exercise_button).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.save_diet_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveExerciseData();
-                startActivity(new Intent(ExerciseActivity.this, SleepActivity.class));
+                saveDietData();
+                startActivity(new Intent(DietActivity.this, ExerciseActivity.class));
             }
         });
     }
 
-    private void saveExerciseData() {
-        String exerciseDetails = exerciseInput.getText().toString();
+    private void saveDietData() {
+        String dietDetails = dietInput.getText().toString();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("date", "2024-06-12");
-        values.put("description", exerciseDetails);
-        db.insert("exercise", null, values);
+        values.put("description", dietDetails);
+        db.insert("diet", null, values);
     }
 }

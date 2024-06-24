@@ -1,4 +1,4 @@
-package com.huojieren.healthdiary;
+package com.huojieren.healthdiary.activity;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.huojieren.healthdiary.HealthDatabaseHelper;
+import com.huojieren.healthdiary.R;
 
 public class SleepActivity extends AppCompatActivity {
 
