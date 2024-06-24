@@ -16,16 +16,18 @@
         android:id="@+id/sleep_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter your sleep details" />
+        android:autofillHints="none"
+        android:hint="Enter your sleep details"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/date_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autofillHints="none"
         android:focusable="false"
         android:hint="Date"
-        android:inputType="date"
-        android:onClick="showDatePickerDialog" />
+        android:inputType="date" />
 
     <Button
         android:id="@+id/save_sleep_button"

@@ -61,8 +61,8 @@ public class SummaryFragment extends Fragment {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
             do {
-                String date = cursor.getString(cursor.getColumnIndex("date"));
-                String description = cursor.getString(cursor.getColumnIndex("description"));
+                String date = cursor.getString(cursor.getColumnIndexOrThrow("date"));
+                String description = cursor.getString(cursor.getColumnIndexOrThrow("description"));
 
                 if (!date.equals(currentDate)) {
                     currentDate = date;
