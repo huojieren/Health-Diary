@@ -1,0 +1,171 @@
+# 操作系统文件
+######################
+# Windows
+######################
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+######################
+# macOS
+######################
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# 忽略Spotlight相关文件
+.metadata_never_index
+.metadata_never_index_unless_rootfs
+
+# 忽略缓存文件
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+######################
+# Linux
+######################
+*~
+
+# 编辑器和IDE
+######################
+# VSCode
+######################
+.vscode/
+
+# Sublime Text
+######################
+*.sublime-project
+*.sublime-workspace
+
+# JetBrains (IntelliJ IDEA, PyCharm, etc.)
+######################
+.idea/
+*.iml
+target/
+
+# Visual Studio
+######################
+.vs/
+*.csproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Eclipse
+######################
+.project
+.classpath
+.cproject
+.settings/
+
+# Xcode
+######################
+*.xcworkspace
+*.xcodeproj
+xcuserdata/
+
+# 编译输出
+######################
+# Python
+######################
+__pycache__/
+*.py[cod]
+*.so
+
+# Java
+######################
+*.class
+*.jar
+*.war
+*.ear
+
+# C/C++
+######################
+*.obj
+*.o
+*.so
+*.exe
+*.out
+*.dSYM/
+*.dS_Store
+*.pdb
+
+# Node.js
+######################
+node_modules/
+
+# Logs
+######################
+*.log
+
+# 临时文件
+######################
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# 文件压缩和打包
+######################
+*.zip
+*.tar.gz
+*.rar
+
+# 框架和工具
+######################
+# Django
+######################
+*.sqlite3
+*.pyc
+*.pyo
+db.sqlite3
+
+# Flask
+######################
+instance/
+*.pyc
+*.pyo
+
+# Ruby on Rails
+######################
+*.gem
+*.rbc
+*.sass-cache/
+.rspec
+.yarn-integrity
+
+# Go
+######################
+*.exe
+*.exe~
+
+# Terraform
+######################
+*.tfstate
+*.tfstate.*
+
+# Haskell
+######################
+*.hi
+*.dyn_hi
+*.dyn_o
+
+# Lua
+######################
+*.luac
+
+# PITest
+######################
+report/
+
+# Gradle
+######################
+.gradle/
+build/
