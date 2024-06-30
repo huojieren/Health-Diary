@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ExerciseViewHolder> {
 
-    private List<Record> records;
+    private final List<Record> records;
 
     public ExerciseAdapter(List<Record> records) {
         this.records = records != null ? records : new ArrayList<>();
@@ -41,7 +41,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
     }
 
     static class ExerciseViewHolder extends RecyclerView.ViewHolder {
-        TextView descriptionTextView;
+        final TextView descriptionTextView;
 
         ExerciseViewHolder(View itemView) {
             super(itemView);

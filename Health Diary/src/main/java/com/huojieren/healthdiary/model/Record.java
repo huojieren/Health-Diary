@@ -1,5 +1,8 @@
 package com.huojieren.healthdiary.model;
 
+/**
+ * @noinspection unused, unused, unused, unused, unused
+ */
 public class Record {
     private String date;
     private String type;

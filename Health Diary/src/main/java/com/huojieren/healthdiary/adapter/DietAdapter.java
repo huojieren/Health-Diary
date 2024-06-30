@@ -16,7 +16,7 @@ import java.util.List;
 
 public class DietAdapter extends RecyclerView.Adapter<DietAdapter.DietViewHolder> {
 
-    private List<Record> records;
+    private final List<Record> records;
 
     public DietAdapter(List<Record> records) {
         this.records = records != null ? records : new ArrayList<>();
@@ -41,7 +41,7 @@ public class DietAdapter extends RecyclerView.Adapter<DietAdapter.DietViewHolder
     }
 
     static class DietViewHolder extends RecyclerView.ViewHolder {
-        TextView descriptionTextView;
+        final TextView descriptionTextView;
 
         DietViewHolder(View itemView) {
             super(itemView);

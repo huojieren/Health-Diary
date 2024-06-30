@@ -1,9 +1,7 @@
 package com.huojieren.healthdiary;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -21,23 +19,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = null;
-                int itemId = item.getItemId();
-                if (R.id.navigation_diet == itemId)
-                    selectedFragment = new DietFragment();
-                else if (R.id.navigation_exercise == itemId)
-                    selectedFragment = new ExerciseFragment();
-                else if (R.id.navigation_sleep == itemId)
-                    selectedFragment = new SleepFragment();
-                else if (R.id.navigation_summary == itemId) {
-                    selectedFragment = new SummaryFragment();
-                }
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-                return true;
+        navigation.setOnNavigationItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+            int itemId = item.getItemId();
+            if (R.id.navigation_diet == itemId)
+                selectedFragment = new DietFragment();
+            else if (R.id.navigation_exercise == itemId)
+                selectedFragment = new ExerciseFragment();
+            else if (R.id.navigation_sleep == itemId)
+                selectedFragment = new SleepFragment();
+            else if (R.id.navigation_summary == itemId) {
+                selectedFragment = new SummaryFragment();
             }
+            if (selectedFragment != null) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+            }
+            return true;
         });
 
         // Set default fragment

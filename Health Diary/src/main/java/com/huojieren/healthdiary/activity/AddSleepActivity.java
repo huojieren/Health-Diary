@@ -4,8 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,19 +34,11 @@ public class AddSleepActivity extends AppCompatActivity {
         setCurrentDate();
 
         // 点击日期输入框时弹出选择框
-        dateInput.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog();
-            }
-        });
+        dateInput.setOnClickListener(v -> showDatePickerDialog());
 
-        findViewById(R.id.save_sleep_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveSleepData();
-                finish();
-            }
+        findViewById(R.id.save_sleep_button).setOnClickListener(v -> {
+            saveSleepData();
+            finish();
         });
     }
 
@@ -66,15 +56,12 @@ public class AddSleepActivity extends AppCompatActivity {
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        Calendar selectedDate = Calendar.getInstance();
-                        selectedDate.set(year, month, dayOfMonth);
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                        String selectedDateString = sdf.format(selectedDate.getTime());
-                        dateInput.setText(selectedDateString);
-                    }
+                (view, year1, month1, dayOfMonth1) -> {
+                    Calendar selectedDate = Calendar.getInstance();
+                    selectedDate.set(year1, month1, dayOfMonth1);
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    String selectedDateString = sdf.format(selectedDate.getTime());
+                    dateInput.setText(selectedDateString);
                 }, year, month, dayOfMonth);
 
         datePickerDialog.show();

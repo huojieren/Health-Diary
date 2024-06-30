@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SleepAdapter extends RecyclerView.Adapter<SleepAdapter.SleepViewHolder> {
 
-    private List<Record> records;
+    private final List<Record> records;
 
     public SleepAdapter(List<Record> records) {
         this.records = records != null ? records : new ArrayList<>();
@@ -41,7 +41,7 @@ public class SleepAdapter extends RecyclerView.Adapter<SleepAdapter.SleepViewHol
     }
 
     static class SleepViewHolder extends RecyclerView.ViewHolder {
-        TextView descriptionTextView;
+        final TextView descriptionTextView;
 
         SleepViewHolder(View itemView) {
             super(itemView);

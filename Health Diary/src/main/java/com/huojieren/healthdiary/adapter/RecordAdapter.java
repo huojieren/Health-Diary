@@ -41,8 +41,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
     }
 
     static class RecordViewHolder extends RecyclerView.ViewHolder {
-        TextView dateTextView;
-        TextView descriptionTextView;
+        final TextView dateTextView;
+        final TextView descriptionTextView;
 
         public RecordViewHolder(@NonNull View itemView) {
             super(itemView);

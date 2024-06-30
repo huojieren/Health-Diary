@@ -15,21 +15,12 @@ import com.huojieren.healthdiary.R;
 import com.huojieren.healthdiary.adapter.RecordAdapter;
 import com.huojieren.healthdiary.model.Record;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SummaryListFragment extends Fragment {
 
     private static final String ARG_RECORDS = "records";
     private List<Record> records;
-
-    public static SummaryListFragment newInstance(List<Record> records) {
-        SummaryListFragment fragment = new SummaryListFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(ARG_RECORDS, new ArrayList<>(records));
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

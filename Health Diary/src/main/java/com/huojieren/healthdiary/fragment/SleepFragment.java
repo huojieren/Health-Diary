@@ -22,10 +22,7 @@ import com.huojieren.healthdiary.adapter.SleepAdapter;
 import com.huojieren.healthdiary.model.Record;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 public class SleepFragment extends Fragment {
 
@@ -52,15 +49,14 @@ public class SleepFragment extends Fragment {
 
     private void loadData() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        List<Record> records = fetchRecordsFromDatabase(db, "sleep");
-        Map<String, List<Record>> groupedRecords = groupRecordsByDate(records);
+        List<Record> records = fetchRecordsFromDatabase(db);
         SleepAdapter sleepAdapter = new SleepAdapter(records);
         RecyclerView.setAdapter(sleepAdapter);
     }
 
-    private List<Record> fetchRecordsFromDatabase(SQLiteDatabase db, String tableName) {
+    private List<Record> fetchRecordsFromDatabase(SQLiteDatabase db) {
         List<Record> records = new ArrayList<>();
-        Cursor cursor = db.query(tableName, new String[]{"date", "description"}, null, null, null, null, "date ASC");
+        Cursor cursor = db.query("sleep", new String[]{"date", "description"}, null, null, null, null, "date ASC");
 
         if (cursor.moveToFirst()) {
             do {
@@ -73,15 +69,4 @@ public class SleepFragment extends Fragment {
         return records;
     }
 
-    private Map<String, List<Record>> groupRecordsByDate(List<Record> records) {
-        Map<String, List<Record>> groupedRecords = new HashMap<>();
-        for (Record record : records) {
-            String date = record.getDate();
-            if (!groupedRecords.containsKey(date)) {
-                groupedRecords.put(date, new ArrayList<>());
-            }
-            Objects.requireNonNull(groupedRecords.get(date)).add(record);
-        }
-        return groupedRecords;
-    }
 }

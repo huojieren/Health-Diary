@@ -24,6 +24,7 @@ import com.huojieren.healthdiary.model.Record;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class SummaryFragment extends Fragment {
 
@@ -32,9 +33,6 @@ public class SummaryFragment extends Fragment {
     private RecyclerView dietRecyclerView;
     private RecyclerView exerciseRecyclerView;
     private RecyclerView sleepRecyclerView;
-    private DietAdapter dietAdapter;
-    private ExerciseAdapter exerciseAdapter;
-    private SleepAdapter sleepAdapter;
     private List<String> dates;
     private HashMap<String, List<Record>> dietRecords;
     private HashMap<String, List<Record>> exerciseRecords;
@@ -92,7 +90,7 @@ public class SummaryFragment extends Fragment {
                 dietRecords.put(date, new ArrayList<>());
                 dates.add(date);
             }
-            dietRecords.get(date).add(new Record(date, "Diet", description));
+            Objects.requireNonNull(dietRecords.get(date)).add(new Record(date, "Diet", description));
         }
         dietCursor.close();
 
@@ -105,7 +103,7 @@ public class SummaryFragment extends Fragment {
                 exerciseRecords.put(date, new ArrayList<>());
                 if (!dates.contains(date)) dates.add(date);
             }
-            exerciseRecords.get(date).add(new Record(date, "Exercise", description));
+            Objects.requireNonNull(exerciseRecords.get(date)).add(new Record(date, "Exercise", description));
         }
         exerciseCursor.close();
 
@@ -118,20 +116,20 @@ public class SummaryFragment extends Fragment {
                 sleepRecords.put(date, new ArrayList<>());
                 if (!dates.contains(date)) dates.add(date);
             }
-            sleepRecords.get(date).add(new Record(date, "Sleep", description));
+            Objects.requireNonNull(sleepRecords.get(date)).add(new Record(date, "Sleep", description));
         }
         sleepCursor.close();
 
-        ArrayAdapter<String> dateAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, dates);
+        ArrayAdapter<String> dateAdapter = new ArrayAdapter<>(requireActivity(), android.R.layout.simple_spinner_item, dates);
         dateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dateSpinner.setAdapter(dateAdapter);
     }
 
     private void updateRecyclerViews(String date) {
 
-        dietAdapter = new DietAdapter(dietRecords.get(date));
-        exerciseAdapter = new ExerciseAdapter(exerciseRecords.get(date));
-        sleepAdapter = new SleepAdapter(sleepRecords.get(date));
+        DietAdapter dietAdapter = new DietAdapter(dietRecords.get(date));
+        ExerciseAdapter exerciseAdapter = new ExerciseAdapter(exerciseRecords.get(date));
+        SleepAdapter sleepAdapter = new SleepAdapter(sleepRecords.get(date));
 
         dietRecyclerView.setAdapter(dietAdapter);
         exerciseRecyclerView.setAdapter(exerciseAdapter);
