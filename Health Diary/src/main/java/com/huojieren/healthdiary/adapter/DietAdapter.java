@@ -11,27 +11,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.huojieren.healthdiary.R;
 import com.huojieren.healthdiary.model.Record;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordViewHolder> {
+public class DietAdapter extends RecyclerView.Adapter<DietAdapter.DietViewHolder> {
 
-    private final List<Record> records;
+    private List<Record> records;
 
-    public RecordAdapter(List<Record> records) {
-        this.records = records;
+    public DietAdapter(List<Record> records) {
+        this.records = records != null ? records : new ArrayList<>();
     }
 
     @NonNull
     @Override
-    public RecordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DietViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_record, parent, false);
-        return new RecordViewHolder(view);
+        return new DietViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecordViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DietViewHolder holder, int position) {
         Record record = records.get(position);
-        holder.dateTextView.setText(record.getDate());
         holder.descriptionTextView.setText(record.getDescription());
     }
 
@@ -40,13 +40,11 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
         return records.size();
     }
 
-    static class RecordViewHolder extends RecyclerView.ViewHolder {
-        TextView dateTextView;
+    static class DietViewHolder extends RecyclerView.ViewHolder {
         TextView descriptionTextView;
 
-        public RecordViewHolder(@NonNull View itemView) {
+        DietViewHolder(View itemView) {
             super(itemView);
-            dateTextView = itemView.findViewById(R.id.date_text_view);
             descriptionTextView = itemView.findViewById(R.id.description_text_view);
         }
     }

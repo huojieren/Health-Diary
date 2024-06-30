@@ -8,13 +8,18 @@ public class Record {
     public Record() {
     }
 
+    public Record(String date, String description) {
+        this.date = date;
+        this.description = description;
+    }
+
     public Record(String date, String type, String description) {
         this.date = date;
         this.type = type;
         this.description = description;
     }
 
-    public Record(String date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -22,24 +27,19 @@ public class Record {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getDescription() {
         return description;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
-
