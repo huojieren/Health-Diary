@@ -30,21 +30,6 @@
             android:name=".activity.AddDietActivity"
             android:exported="false" />
         <activity
-            android:name=".fragment.DietFragment"
-            android:exported="false" />
-        <activity
-            android:name=".fragment.ExerciseFragment"
-            android:exported="false" />
-        <activity
-            android:name=".fragment.SleepFragment"
-            android:exported="false" />
-        <activity
-            android:name=".fragment.SummaryFragment"
-            android:exported="false" />
-        <activity
-            android:name=".fragment.SummaryListFragment"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
