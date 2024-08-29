@@ -169,3 +169,7 @@ report/
 ######################
 .gradle/
 build/
+
+# Android
+######################
+release/
