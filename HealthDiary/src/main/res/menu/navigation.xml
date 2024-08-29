@@ -2,17 +2,17 @@
     <item
         android:id="@+id/navigation_diet"
         android:icon="@drawable/ic_diet"
-        android:title="Diet" />
+        android:title="@string/diet" />
     <item
         android:id="@+id/navigation_exercise"
         android:icon="@drawable/ic_exercise"
-        android:title="Exercise" />
+        android:title="@string/exercise" />
     <item
         android:id="@+id/navigation_sleep"
         android:icon="@drawable/ic_sleep"
-        android:title="Sleep" />
+        android:title="@string/sleep" />
     <item
         android:id="@+id/navigation_summary"
         android:icon="@drawable/ic_summary"
-        android:title="Summary" />
+        android:title="@string/summary" />
 </menu>

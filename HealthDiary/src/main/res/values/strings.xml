@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Health Diary</string>
+    <string name="diet">饮食</string>
+    <string name="exercise">锻炼</string>
+    <string name="sleep">作息</string>
+    <string name="summary">汇总</string>
+    <string name="enter_date">点击选择日期</string>
+    <string name="save">保存</string>
 </resources>
