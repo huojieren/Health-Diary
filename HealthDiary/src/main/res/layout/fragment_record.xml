@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <Button
-        android:id="@+id/add_diet_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Add Diet Record" />
-
     <TextView
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:paddingBottom="8dp"
-        android:text="Diet Records"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tool:text="饮食" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/diet_recycler_view"
+        android:id="@+id/rv_record"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp" />
+
+    <Button
+        android:id="@+id/btn_add_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        tool:text="添加一条XX记录" />
 </LinearLayout>

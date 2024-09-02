@@ -1,45 +1,52 @@
 package com.huojieren.healthdiary;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.huojieren.healthdiary.fragment.DietFragment;
-import com.huojieren.healthdiary.fragment.ExerciseFragment;
-import com.huojieren.healthdiary.fragment.SleepFragment;
+import com.google.android.material.navigation.NavigationBarView;
+import com.huojieren.healthdiary.fragment.RecordFragment;
 import com.huojieren.healthdiary.fragment.SummaryFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // 为底部的导航栏设置点击监听器来切换不同片段
         BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(item -> {
-            Fragment selectedFragment = null;
-            int itemId = item.getItemId();
-            if (R.id.navigation_diet == itemId)
-                selectedFragment = new DietFragment();
-            else if (R.id.navigation_exercise == itemId)
-                selectedFragment = new ExerciseFragment();
-            else if (R.id.navigation_sleep == itemId)
-                selectedFragment = new SleepFragment();
-            else if (R.id.navigation_summary == itemId) {
-                selectedFragment = new SummaryFragment();
-            }
-            if (selectedFragment != null) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-            }
-            return true;
-        });
+        navigation.setOnItemSelectedListener(this);
 
-        // Set default fragment
+        // 设置默认片段
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DietFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    RecordFragment.newInstance("diet")).commit();
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment selectedFragment = null;
+        // 为不同点击动作生成对应的片段
+        if (item.getItemId() == R.id.navigation_diet)
+            selectedFragment = RecordFragment.newInstance("diet");
+        else if (item.getItemId() == R.id.navigation_exercise)
+            selectedFragment = RecordFragment.newInstance("exercise");
+        else if (item.getItemId() == R.id.navigation_sleep)
+            selectedFragment = RecordFragment.newInstance("sleep");
+        else if (item.getItemId() == R.id.navigation_summary)
+            selectedFragment = new SummaryFragment();
+        // 断言selectedFragment不为空
+        assert selectedFragment != null;
+        // 将预制的片段替换为选中的片段
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                selectedFragment).commit();
+        return true;
     }
 }

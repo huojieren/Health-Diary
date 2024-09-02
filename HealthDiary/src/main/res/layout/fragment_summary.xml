@@ -16,12 +16,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="8dp"
-        android:text="Diet"
+        android:text="@string/diet"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/diet_recycler_view"
+        android:id="@+id/rv_record"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp" />
@@ -31,12 +31,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="8dp"
-        android:text="Exercise"
+        android:text="@string/exercise"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/exercise_recycler_view"
+        android:id="@+id/rv_exercise"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp" />
@@ -46,12 +46,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="8dp"
-        android:text="Sleep"
+        android:text="@string/sleep"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/sleep_recycler_view"
+        android:id="@+id/rv_sleep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp" />

@@ -1,8 +1,15 @@
 package com.huojieren.healthdiary.database;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import com.huojieren.healthdiary.model.Record;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HealthDatabaseHelper extends SQLiteOpenHelper {
 
@@ -11,9 +18,20 @@ public class HealthDatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_EXERCISE = "exercise";// 锻炼表名
     private static final String TABLE_SLEEP = "sleep";// 作息表名
     private static final int DATABASE_VERSION = 1;// 数据库版本号
+    private static HealthDatabaseHelper mdbHelper = null;// 单例模式获取唯一数据库帮助器实例
+    private SQLiteDatabase mReadDB = null;
+    private SQLiteDatabase mWriteDB = null;
 
     public HealthDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    // 单例模式获取唯一数据库帮助器实例
+    public static HealthDatabaseHelper getInstance(Context context) {
+        if (mdbHelper == null) {
+            mdbHelper = new HealthDatabaseHelper(context);
+        }
+        return mdbHelper;
     }
 
     @Override
@@ -41,5 +59,53 @@ public class HealthDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXERCISE);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SLEEP);
         onCreate(db);
+    }
+
+    // 打开数据库的读连接
+    public SQLiteDatabase openReadLink() {
+        if (mReadDB == null || !mReadDB.isOpen()) {
+            mReadDB = mdbHelper.getReadableDatabase();
+        }
+        return mReadDB;
+    }
+
+    // 打开数据库的写连接
+    public SQLiteDatabase openWriteLink() {
+        if (mWriteDB == null || !mWriteDB.isOpen()) {
+            mWriteDB = mdbHelper.getWritableDatabase();
+        }
+        return mWriteDB;
+    }
+
+    // 关闭数据库连接
+    public void closeLink() {
+        if (mReadDB != null && mReadDB.isOpen()) {
+            mReadDB.close();
+            mReadDB = null;
+        }
+        if (mWriteDB != null && mWriteDB.isOpen()) {
+            mWriteDB.close();
+            mWriteDB = null;
+        }
+    }
+
+    public List<Record> queryRecordByType(String type) {
+        List<Record> recordList = new ArrayList<>();
+
+        // 从数据库中查询记录
+        Log.d("dbHelper", type);
+        Cursor cursor = mReadDB.query(type, null, null,
+                null, null, null, type + "_date ASC");
+
+        // 将读取到的记录转为列表返回
+        while (cursor.moveToNext()) {
+            Record record = new Record();
+            record.setDate(cursor.getString(1));
+            record.setType(type);
+            record.setDescription(cursor.getString(2));
+            recordList.add(record);
+        }
+        cursor.close();
+        return recordList;
     }
 }
