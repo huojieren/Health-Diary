@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.huojieren.healthdiary.MainActivity;
 import com.huojieren.healthdiary.R;
 import com.huojieren.healthdiary.activity.AddRecordActivity;
 import com.huojieren.healthdiary.adapter.RecordListAdapter;
@@ -41,18 +42,20 @@ public class RecordFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d("RecordFragment flaw", fragmentType + " onCreate called");
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             // 固定当前片段处理的记录类型
             fragmentType = getArguments().getString(ARG_TYPE);
-            Log.d("RecordFragment", fragmentType == null ? "fragment is null" : "fragment is not null");
+            Log.d("RecordFragment", fragmentType == null ? "fragment is null" : "fragmentType:" + fragmentType);
         }
-
+        dbHelper = ((MainActivity) getActivity()).getDbHelper();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d("RecordFragment flaw", fragmentType + " onCreateView called");
         // 获取布局文件的 Java 对象
         View fragment_record = inflater.inflate(R.layout.fragment_record, container, false);
 
@@ -61,7 +64,7 @@ public class RecordFragment extends Fragment {
         TextView tv_title = fragment_record.findViewById(R.id.tv_title);
 
         // 根据类型获取对应的资源 ID
-        int resId = R.string.diet;
+        int resId = R.string.diet;// 默认类型为饮食
         switch (fragmentType) {
             case "diet":
                 resId = R.string.diet;
@@ -79,11 +82,11 @@ public class RecordFragment extends Fragment {
         String showText = "添加一条" + getResources().getString(resId) + "记录";
         btn_add_record.setText(showText);
 
-        dbHelper = HealthDatabaseHelper.getInstance(getContext());
-        Log.d("RecordFragment", dbHelper == null ? "dbHelper is null" : "dbHelper is not null");
+        Log.d("RecordFragment", dbHelper == null ?
+                "after getInstance:dbHelper is null" :
+                "after getInstance:dbHelper is not null");
         // 断言dbHelper != null
         assert dbHelper != null;
-        dbHelper.openReadLink();
         // 根据 fragmentType 来处理不同的逻辑
         List<Record> recordList = dbHelper.queryRecordByType(fragmentType);
         RecordListAdapter recordListAdapter = new RecordListAdapter(recordList);
@@ -94,13 +97,6 @@ public class RecordFragment extends Fragment {
         btn_add_record.setOnClickListener(this::saveBtnOnClick);
 
         return fragment_record;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        // TODO 数据库close，插入失败
-        dbHelper.closeLink();
     }
 
     private void saveBtnOnClick(View v) {

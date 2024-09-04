@@ -1,5 +1,6 @@
 package com.huojieren.healthdiary.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,7 +23,7 @@ public class HealthDatabaseHelper extends SQLiteOpenHelper {
     private SQLiteDatabase mReadDB = null;
     private SQLiteDatabase mWriteDB = null;
 
-    public HealthDatabaseHelper(Context context) {
+    private HealthDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -62,19 +63,17 @@ public class HealthDatabaseHelper extends SQLiteOpenHelper {
     }
 
     // 打开数据库的读连接
-    public SQLiteDatabase openReadLink() {
+    public void openReadLink() {
         if (mReadDB == null || !mReadDB.isOpen()) {
             mReadDB = mdbHelper.getReadableDatabase();
         }
-        return mReadDB;
     }
 
     // 打开数据库的写连接
-    public SQLiteDatabase openWriteLink() {
+    public void openWriteLink() {
         if (mWriteDB == null || !mWriteDB.isOpen()) {
             mWriteDB = mdbHelper.getWritableDatabase();
         }
-        return mWriteDB;
     }
 
     // 关闭数据库连接
@@ -87,6 +86,10 @@ public class HealthDatabaseHelper extends SQLiteOpenHelper {
             mWriteDB.close();
             mWriteDB = null;
         }
+    }
+
+    public long insertRecord(String type, ContentValues record) {
+        return mWriteDB.insert(type, null, record);
     }
 
     public List<Record> queryRecordByType(String type) {

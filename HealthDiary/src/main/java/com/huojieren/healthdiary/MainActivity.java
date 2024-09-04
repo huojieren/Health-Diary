@@ -9,15 +9,23 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.huojieren.healthdiary.database.HealthDatabaseHelper;
 import com.huojieren.healthdiary.fragment.RecordFragment;
 import com.huojieren.healthdiary.fragment.SummaryFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
 
+    private HealthDatabaseHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // 打开数据库连接
+        dbHelper = HealthDatabaseHelper.getInstance(this);
+        dbHelper.openReadLink();
+        dbHelper.openWriteLink();
 
         // 为底部的导航栏设置点击监听器来切换不同片段
         BottomNavigationView navigation = findViewById(R.id.navigation);
@@ -28,6 +36,16 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     RecordFragment.newInstance("diet")).commit();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbHelper.closeLink();
+    }
+
+    public HealthDatabaseHelper getDbHelper() {
+        return dbHelper;
     }
 
     @Override

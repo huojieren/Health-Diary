@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.huojieren.healthdiary.MainActivity;
 import com.huojieren.healthdiary.R;
 import com.huojieren.healthdiary.adapter.RecordListAdapter;
 import com.huojieren.healthdiary.database.HealthDatabaseHelper;
@@ -25,8 +26,7 @@ public class SummaryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_summary, container, false);
 
-        dbHelper = HealthDatabaseHelper.getInstance(getContext());
-        dbHelper.openReadLink();
+        dbHelper = ((MainActivity) getActivity()).getDbHelper();
 
         // Spinner date_spinner = view.findViewById(R.id.date_spinner);
         RecyclerView rv_record = view.findViewById(R.id.rv_record);
@@ -59,7 +59,6 @@ public class SummaryFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        dbHelper.closeLink();
     }
 }
 

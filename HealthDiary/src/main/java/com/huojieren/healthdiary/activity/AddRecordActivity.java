@@ -3,6 +3,7 @@ package com.huojieren.healthdiary.activity;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -31,7 +32,12 @@ public class AddRecordActivity extends AppCompatActivity implements DatePickerDi
         et_input_record = findViewById(R.id.et_input_record);
         et_input_date = findViewById(R.id.et_input_date);
 
-        dbHelper = new HealthDatabaseHelper(this);
+        dbHelper = HealthDatabaseHelper.getInstance(this);
+
+        // 从上文中获取记录的类型
+        if ((getIntent().getExtras()) != null)
+            recordType = (getIntent().getExtras().getString(ARG_TYPE));
+        Log.d("AddRecordActivity", "recordType:" + recordType);
 
         // 将当前日期设为默认值
         setCurrentDate();
@@ -40,15 +46,13 @@ public class AddRecordActivity extends AppCompatActivity implements DatePickerDi
         et_input_date.setOnClickListener(v -> showDatePickerDialog());
 
         findViewById(R.id.btn_save).setOnClickListener(v -> {
-            saveRecord();
-            // TODO 插入记录反馈
-            Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+            if (saveRecord() == -1) {
+                Toast.makeText(this, "保存失败", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+            }
             finish();
         });
-
-        // 从上文中获取记录的类型
-        if ((getIntent().getExtras()) != null)
-            recordType = (getIntent().getExtras().getString(ARG_TYPE));
     }
 
     // 将当前日期设为默认值
@@ -67,14 +71,16 @@ public class AddRecordActivity extends AppCompatActivity implements DatePickerDi
         datePickerDialog.show();
     }
 
-    private void saveRecord() {
+    private long saveRecord() {
         String recordDate = et_input_date.getText().toString();
         String recordDesc = et_input_record.getText().toString();
         ContentValues record = new ContentValues();
-        record.put("date", recordDate);
-        record.put("description", recordDesc);
-        dbHelper.openWriteLink().insert(recordType, null, record);
-        dbHelper.closeLink();
+        record.put(recordType + "_date", recordDate);
+        record.put(recordType + "_desc", recordDesc);
+        Log.d("AddRecordActivity", "record to add:" + record);
+        long insertReturnFlag = dbHelper.insertRecord(recordType, record);
+        Log.d("AddRecordActivity", "insert return:" + insertReturnFlag);
+        return insertReturnFlag;
     }
 
     // 监听器，回调函数
