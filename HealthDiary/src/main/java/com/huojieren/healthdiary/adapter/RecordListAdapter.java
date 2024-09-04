@@ -1,5 +1,6 @@
 package com.huojieren.healthdiary.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,9 @@ public class RecordListAdapter extends RecyclerView.Adapter<RecordListAdapter.Re
 
     // 构造函数，用传入的数据列表初始化适配器
     public RecordListAdapter(List<Record> recordList) {
+        Log.d("RecordListAdapter", "recordList:" + recordList.toString());
         this.mRecordList = recordList;
+        Log.d("RecordListAdapter", "mRecordList:" + mRecordList);
     }
 
     // 创建新的 RecordViewHolder 对象，代表单个列表项的视图
@@ -36,6 +39,8 @@ public class RecordListAdapter extends RecyclerView.Adapter<RecordListAdapter.Re
     public void onBindViewHolder(@NonNull RecordViewHolder holder, int position) {
         // 根据位置获取数据，并将其绑定到 RecordViewHolder 的视图上
         Record record = mRecordList.get(position);
+        Log.d("RecordListAdapter", "Binding record at position: " + position +
+                " with date: " + record.getDate() + " and description: " + record.getDescription());
         holder.dateTextView.setText(record.getDate());
         holder.descriptionTextView.setText(record.getDescription());
     }
@@ -43,7 +48,9 @@ public class RecordListAdapter extends RecyclerView.Adapter<RecordListAdapter.Re
     // 返回数据列表的大小
     @Override
     public int getItemCount() {
-        return mRecordList.size();
+        int size = mRecordList == null ? 0 : mRecordList.size();
+        Log.d("RecordListAdapter", "getItemCount: " + size);
+        return size;
     }
 
     // ViewHolder 类，用于缓存视图引用，减少 findViewById 的调用次数

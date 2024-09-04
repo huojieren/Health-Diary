@@ -85,10 +85,9 @@ public class RecordFragment extends Fragment {
         Log.d("RecordFragment", dbHelper == null ?
                 "after getInstance:dbHelper is null" :
                 "after getInstance:dbHelper is not null");
-        // 断言dbHelper != null
-        assert dbHelper != null;
         // 根据 fragmentType 来处理不同的逻辑
         List<Record> recordList = dbHelper.queryRecordByType(fragmentType);
+        Log.d("RecordFragment", "recordList:" + recordList.toString());
         RecordListAdapter recordListAdapter = new RecordListAdapter(recordList);
         rv_record.setAdapter(recordListAdapter);
         rv_record.setLayoutManager(new LinearLayoutManager(getContext()));
