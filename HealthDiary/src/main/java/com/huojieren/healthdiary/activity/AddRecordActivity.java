@@ -1,7 +1,9 @@
 package com.huojieren.healthdiary.activity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.DatePicker;
@@ -12,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.huojieren.healthdiary.R;
 import com.huojieren.healthdiary.database.HealthDatabaseHelper;
+import com.huojieren.healthdiary.model.Record;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,6 +26,7 @@ public class AddRecordActivity extends AppCompatActivity implements DatePickerDi
     private HealthDatabaseHelper dbHelper;
     private static final String ARG_TYPE = "type";
     private String recordType;// 指定记录的类型
+    private Record newRecord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +49,18 @@ public class AddRecordActivity extends AppCompatActivity implements DatePickerDi
         // 点击日期输入框时弹出选择框
         et_input_date.setOnClickListener(v -> showDatePickerDialog());
 
+        // 保存此项记录
         findViewById(R.id.btn_save).setOnClickListener(v -> {
             if (saveRecord() == -1) {
                 Toast.makeText(this, "保存失败", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+                // 返回活动结果
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("newRecord", newRecord);
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
             }
-            finish();
         });
     }
 
@@ -71,19 +80,25 @@ public class AddRecordActivity extends AppCompatActivity implements DatePickerDi
         datePickerDialog.show();
     }
 
+    // 保存此项记录
     private long saveRecord() {
         String recordDate = et_input_date.getText().toString();
         String recordDesc = et_input_record.getText().toString();
+
         ContentValues record = new ContentValues();
         record.put(recordType + "_date", recordDate);
         record.put(recordType + "_desc", recordDesc);
+
+        newRecord = new Record(recordDate, recordDesc);
+
         Log.d("AddRecordActivity", "record to add:" + record);
         long insertReturnFlag = dbHelper.insertRecord(recordType, record);
         Log.d("AddRecordActivity", "insert return:" + insertReturnFlag);
+
         return insertReturnFlag;
     }
 
-    // 监听器，回调函数
+    // 日期选择器的监听器，回调函数
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar selectedDate = Calendar.getInstance();

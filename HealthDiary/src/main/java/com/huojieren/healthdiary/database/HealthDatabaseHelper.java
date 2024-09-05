@@ -51,7 +51,7 @@ public class HealthDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_SLEEP +
                 " (sleep_id INTEGER PRIMARY KEY, " +
                 "sleep_date TEXT, " +
-                "sleep_description TEXT)");
+                "sleep_desc TEXT)");
     }
 
     @Override

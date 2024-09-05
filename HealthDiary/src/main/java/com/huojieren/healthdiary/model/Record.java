@@ -2,10 +2,20 @@ package com.huojieren.healthdiary.model;
 
 import androidx.annotation.NonNull;
 
-public class Record {
+import java.io.Serializable;
+
+public class Record implements Serializable {
     private String date;
     private String type;
     private String description;
+
+    public Record() {
+    }
+
+    public Record(String date, String description) {
+        this.date = date;
+        this.description = description;
+    }
 
     public String getDate() {
         return date;
