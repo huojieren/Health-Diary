@@ -10,6 +10,7 @@ import android.util.Log;
 import com.huojieren.healthdiary.model.Record;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class HealthDatabaseHelper extends SQLiteOpenHelper {
@@ -94,12 +95,29 @@ public class HealthDatabaseHelper extends SQLiteOpenHelper {
 
     public List<Record> queryRecordByType(String type) {
         List<Record> recordList = new ArrayList<>();
-
         // 从数据库中查询记录
         Log.d("dbHelper", type);
         Cursor cursor = mReadDB.query(type, null, null,
                 null, null, null, type + "_date ASC");
+        // 将读取到的记录转为列表返回
+        while (cursor.moveToNext()) {
+            Record record = new Record();
+            record.setDate(cursor.getString(1));
+            record.setType(type);
+            record.setDescription(cursor.getString(2));
+            recordList.add(record);
+        }
+        cursor.close();
+        return recordList;
+    }
 
+    public List<Record> queryRecordByDateAndType(String type, String[] selectionArgs) {
+        List<Record> recordList = new ArrayList<>();
+        // 从数据库中查询记录
+        Log.d("SummaryFragment", "selections:" + type + "_date = ?");
+        Log.d("SummaryFragment", "selectionArgs:" + Arrays.toString(selectionArgs));
+        Cursor cursor = mReadDB.query(type, null, type + "_date = ?",
+                selectionArgs, null, null, type + "_date ASC");
         // 将读取到的记录转为列表返回
         while (cursor.moveToNext()) {
             Record record = new Record();
