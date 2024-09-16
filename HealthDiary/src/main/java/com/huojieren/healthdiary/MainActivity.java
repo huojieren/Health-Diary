@@ -12,6 +12,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.huojieren.healthdiary.database.HealthDatabaseHelper;
 import com.huojieren.healthdiary.fragment.RecordFragment;
 import com.huojieren.healthdiary.fragment.SummaryFragment;
+import com.huojieren.healthdiary.fragment.sleepRecordFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
 
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         else if (item.getItemId() == R.id.navigation_exercise)
             selectedFragment = RecordFragment.newInstance("exercise");
         else if (item.getItemId() == R.id.navigation_sleep)
-            selectedFragment = RecordFragment.newInstance("sleep");
+            selectedFragment = sleepRecordFragment.newInstance();
         else if (item.getItemId() == R.id.navigation_summary)
             selectedFragment = new SummaryFragment();
         // 断言selectedFragment不为空

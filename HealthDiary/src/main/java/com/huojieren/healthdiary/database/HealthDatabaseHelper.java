@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.huojieren.healthdiary.model.Record;
+import com.huojieren.healthdiary.model.sleepRecord;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +20,7 @@ public class HealthDatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_DIET = "diet";// 饮食表名
     private static final String TABLE_EXERCISE = "exercise";// 锻炼表名
     private static final String TABLE_SLEEP = "sleep";// 作息表名
-    private static final int DATABASE_VERSION = 1;// 数据库版本号
+    private static final int DATABASE_VERSION = 2;// 数据库版本号
     private static HealthDatabaseHelper mdbHelper = null;// 单例模式获取唯一数据库帮助器实例
     private SQLiteDatabase mReadDB = null;
     private SQLiteDatabase mWriteDB = null;
@@ -52,15 +53,18 @@ public class HealthDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_SLEEP +
                 " (sleep_id INTEGER PRIMARY KEY, " +
                 "sleep_date TEXT, " +
-                "sleep_desc TEXT)");
+                "sleep_desc TEXT," +
+                "sleep_start TEXT," +
+                "sleep_end)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_DIET);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EXERCISE);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SLEEP);
-        onCreate(db);
+        if (DATABASE_VERSION == 1) {
+            // 修改作息表
+            db.execSQL("ALTER TABLE " + TABLE_SLEEP + " ADD COLUMN sleep_start TEXT");
+            db.execSQL("ALTER TABLE " + TABLE_SLEEP + " ADD COLUMN sleep_end TEXT");
+        }
     }
 
     // 打开数据库的读连接
@@ -91,6 +95,24 @@ public class HealthDatabaseHelper extends SQLiteOpenHelper {
 
     public long insertRecord(String type, ContentValues record) {
         return mWriteDB.insert(type, null, record);
+    }
+
+    public List<sleepRecord> querySleepRecord() {
+        List<sleepRecord> recordList = new ArrayList<>();
+        // 从数据库中查询记录
+        Cursor cursor = mReadDB.query(TABLE_SLEEP, null, null,
+                null, null, null, "sleep_date ASC");
+        // 将读取到的记录转为列表返回
+        while (cursor.moveToNext()) {
+            sleepRecord record = new sleepRecord();
+            record.setDate(cursor.getString(1));
+            record.setDescription(cursor.getString(2));
+            record.setSleepTime(cursor.getString(3));
+            record.setWakeupTime(cursor.getString(4));
+            recordList.add(record);
+        }
+        cursor.close();
+        return recordList;
     }
 
     public List<Record> queryRecordByType(String type) {

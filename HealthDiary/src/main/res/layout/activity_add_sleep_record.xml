@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="50sp"
+        android:textSize="@dimen/emoji_size"
         tools:text="💤" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_marginBottom="16dp"
         android:gravity="center"
         android:paddingBottom="80dp"
-        android:textSize="25sp"
+        android:textSize="@dimen/title_size"
         tools:text="记录一次睡眠" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

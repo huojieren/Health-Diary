@@ -148,9 +148,7 @@ public class AddSleepRecordActivity extends AppCompatActivity implements DatePic
         newRecord = new sleepRecord(recordDate, recordDesc, recordSleepTime, recordWakeupTime);
 
         Log.d("AddSleepRecordActivity", "record to add:" + record);
-        dbHelper.openWriteLink();
         long insertReturnFlag = dbHelper.insertRecord("sleep", record);
-        dbHelper.closeLink();
         Log.d("AddSleepRecordActivity", "insert return:" + insertReturnFlag);
 
         return insertReturnFlag;

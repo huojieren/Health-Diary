@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="emoji_size">50sp</dimen>
+    <dimen name="title_size">25sp</dimen>
+    <dimen name="record_item_size">14sp</dimen>
+</resources>

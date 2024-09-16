@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <Button
-        android:id="@+id/add_exercise_button"
+    <TextView
+        android:id="@+id/tv_emoji"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Add Exercise Record" />
+        android:textSize="@dimen/emoji_size"
+        tools:text="💤" />
 
     <TextView
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:paddingBottom="8dp"
-        android:text="Exercise Records"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textSize="@dimen/title_size"
+        tools:text="睡眠" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_exercise"
+        android:id="@+id/rv_sleep_record"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_add_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        tools:text="添加一条XX记录" />
 </LinearLayout>
