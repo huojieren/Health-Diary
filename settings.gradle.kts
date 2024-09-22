@@ -14,4 +14,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Health Diary"
-include("HealthDiary")
+include("app")
