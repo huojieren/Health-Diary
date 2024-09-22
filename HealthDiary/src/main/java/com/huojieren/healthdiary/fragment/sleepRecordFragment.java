@@ -37,12 +37,7 @@ public class sleepRecordFragment extends Fragment {
 
     @NonNull
     public static sleepRecordFragment newInstance() {
-        sleepRecordFragment recordFragment = new sleepRecordFragment();
-        // 将上文传入的记录类型通过Bundle存储到片段中
-        Bundle args = new Bundle();
-        args.putString("type", "sleep");
-        recordFragment.setArguments(args);
-        return recordFragment;
+        return new sleepRecordFragment();
     }
 
     @Override

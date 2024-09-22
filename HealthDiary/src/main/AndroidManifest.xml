@@ -16,6 +16,9 @@
             android:name=".activity.AddRecordActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.AddDietRecordActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.AddSleepRecordActivity"
             android:exported="true" />
         <activity

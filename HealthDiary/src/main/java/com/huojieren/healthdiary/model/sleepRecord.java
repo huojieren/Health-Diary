@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class sleepRecord implements Serializable {
     private String date;
-    private String type;
     private String description;
     private String sleepTime;
     private String wakeupTime;
@@ -30,14 +29,6 @@ public class sleepRecord implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getDescription() {
@@ -68,7 +59,6 @@ public class sleepRecord implements Serializable {
     public String toString() {
         return "Record{" +
                 "date='" + date + '\'' +
-                ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
                 ", sleepTime='" + sleepTime + '\'' +
                 ", wakeupTime='" + wakeupTime + '\'' +

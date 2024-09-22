@@ -1,15 +1,22 @@
 <resources>
     <string name="app_name">Health Diary</string>
+
     <string name="diet">饮食</string>
     <string name="exercise">锻炼</string>
     <string name="sleep">作息</string>
     <string name="summary">汇总</string>
+    <string name="date_hint">您想记录的日期是？</string>
+    <string name="select_date">选择日期</string>
     <string name="enter_date">点击选择日期</string>
     <string name="save_record">保存记录</string>
-    <string name="sleep_date_hint">您想记录的日期是？</string>
-    <string name="btn_sleep_date">选择日期</string>
+
+    <!-- activity_add_sleep_record.xml -->
     <string name="sleep_start_hint">您是什么时候入睡的？</string>
     <string name="btn_sleep_start">入睡时间</string>
     <string name="sleep_end_hint">您是什么时候醒来的？</string>
     <string name="btn_sleep_end">起床时间</string>
+
+    <!-- activity_add_diet_record.xml -->
+    <string name="diet_desc_hint">您想记录的饮食是？</string>
+    <string name="btn_select_diet_icon">选择图标</string>
 </resources>
